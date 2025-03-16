@@ -1,0 +1,25 @@
+name: Module Publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Module Version'
+        required: true
+        default: 'v1.0.0'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+      
+      - name: Publish Module
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TERRAFORM_REGISTRY_TOKEN: ${{ secrets.TERRAFORM_REGISTRY_TOKEN }}
+        run: |
+          ./module-publish.sh publish ${{ github.event.inputs.version }}
