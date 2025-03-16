@@ -6,7 +6,7 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Import the base README generator
-from generate_readme import ReadmeGenerator
+from scripts.generate_readme import ReadmeGenerator
 
 def main():
     module_path = os.path.dirname(os.path.abspath(__file__))
