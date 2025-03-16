@@ -20,6 +20,6 @@ jobs:
       - name: Publish Module
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TERRAFORM_REGISTRY_TOKEN: ${{ secrets.TERRAFORM_REGISTRY_TOKEN }}
+          # TERRAFORM_REGISTRY_TOKEN: ${{ secrets.TERRAFORM_REGISTRY_TOKEN }}
         run: |
           ./module-publish.sh publish ${{ github.event.inputs.version }}

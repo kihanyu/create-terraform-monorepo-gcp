@@ -10,6 +10,7 @@ from scripts.generate_readme import ReadmeGenerator
 
 def main():
     module_path = os.path.dirname(os.path.abspath(__file__))
+    print(module_path)
     generator = ReadmeGenerator(module_path)
     
     # Optional: Add module-specific customizations
