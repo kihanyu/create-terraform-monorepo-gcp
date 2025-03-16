@@ -2,8 +2,8 @@
 import sys
 import os
 
-# Append parent directory to Python path
-sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
+# Append the project root to Python path
+sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
 
 # Import the base README generator
 from scripts.readme_generator import ReadmeGenerator
