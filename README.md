@@ -101,26 +101,28 @@ We follow semantic versioning for infrastructure modules:
 ```bash
 git clone https://github.com/your-org/gcp-microservices-infra.git
 cd gcp-microservices-infra
-2. Initialize GCP Project
- copy
-bash
+```
 
+### 2. Initialize GCP Project
+
+```bash
 # Set GCP Project
 gcloud config set project YOUR_PROJECT_ID
 
 # Authenticate
 gcloud auth application-default login
-3. Configure Terraform Backend
+```
+
+### 3. Configure Terraform Backend
 Create a GCS bucket for Terraform state:
 
- copy
-bash
-
+```bash
 gsutil mb gs://your-terraform-state-bucket
-4. Select Environment
- copy
-bash
+```
 
+### 4. Select Environment
+
+```bash
 # Navigate to environment
 cd environments/dev/us-central1
 
@@ -129,82 +131,106 @@ terraform init
 
 # Plan infrastructure
 terraform plan
-🤖 Automated Workflows
-README Generation
+```
+
+## 🤖 Automated Workflows
+
+### README Generation
+
 Automatically generate module documentation:
 
- copy
-bash
-
+```bash
 python scripts/generate_readme.py modules/network/v2
-Module Versioning
+```
+
+### Module Versioning
+
 Publish a new module version:
 
- copy
-bash
-
+```bash
 ./scripts/module-publish.sh modules/network v2.0.0
-🔒 Security Practices
-Least privilege IAM roles
-Workload identity for GKE
-Encrypted state management
-Network isolation
-Secret management with Google Secret Manager
-📊 Monitoring & Observability
-Integrated logging
-Prometheus metrics
-Cloud Monitoring dashboards
-Centralized log sinks
-🧪 Testing
-Static Analysis
- copy
-bash
+```
 
+## 🔒 Security Practices
+
+- Least privilege IAM roles
+- Workload identity for GKE
+- Encrypted state management
+- Network isolation
+- Secret management with Google Secret Manager
+
+## 📊 Monitoring & Observability
+
+- Integrated logging
+- Prometheus metrics
+- Cloud Monitoring dashboards
+- Centralized log sinks
+  
+## 🧪 Testing
+
+### Static Analysis
+
+```bash
 # Run tflint
 tflint
 
 # Run terrascan
 terrascan scan
-Integration Testing
- copy
-bash
+```
+
+### Integration Testing
+
+```bash
 
 # Validate module configurations
 terraform validate
 
 # Dry-run infrastructure changes
 terraform plan
-🤝 Contributing
-Fork the repository
-Create a feature branch
-Commit your changes
-Push to the branch
-Create a Pull Request
-Contribution Guidelines
-Follow module versioning strategy
-Add comprehensive documentation
-Include example usage
-Write unit tests
-Update changelog
-📝 Changelog Management
+```
+
+## 🤝 Contributing
+
+- Fork the repository
+- Create a feature branch
+- Commit your changes
+- Push to the branch
+- Create a Pull Request
+
+## Contribution Guidelines
+
+- Follow module versioning strategy
+- Add comprehensive documentation
+- Include example usage
+- Write unit tests
+- Update changelog
+
+## 📝 Changelog Management
+
 We use conventional commit messages:
 
-feat: New features
-fix: Bug fixes
-docs: Documentation updates
-refactor: Code refactoring
-test: Adding tests
-📄 Licensing
+- **feat**: New features
+- **fix**: Bug fixes
+- **docs**: Documentation updates
+- **refactor**: Code refactoring
+- **test**: Adding tests
+
+## 📄 Licensing
+
 This project is licensed under the MIT License.
 
-🌟 Support
-Open an issue for bug reports
-Discuss features in discussions
-Contact maintainers for support
-🔗 Related Resources
-Terraform Documentation
-Google Cloud Documentation
-Terraform GCP Provider
+## 🌟 Support
+
+- Open an issue for bug reports
+- Discuss features in discussions
+- Contact maintainers for support
+
+## 🔗 Related Resources
+
+- [Terraform Documentation](https://www.terraform.io/docs)
+- [Google Cloud Documentation](https://cloud.google.com/docs)
+- [Terraform GCP Provider](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
+
 Maintained by Your Organization
 
 Terraform GCP
