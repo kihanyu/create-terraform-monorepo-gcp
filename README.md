@@ -25,47 +25,174 @@ This monorepo provides a comprehensive, scalable, and modular Terraform infrastr
 - 📦 Modular infrastructure design
 - 🤖 Automated documentation and versioning
 - 🔄 Continuous integration and deployment
- 
+
 ## 🏗 Architecture Overview
 
 ### High-Level Infrastructure Architecture
 
-```plantuml
-@startuml
-!define GCPPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-GCP-Iconz/master/dist
+```mermaid
+flowchart TB
+    subgraph "GCP Project"
+        vpc[VPC Network\nMulti-regional Network]
+        subgraph vpc
+            subnet1[Subnet 1\nus-central1]
+            subnet2[Subnet 2\nus-west1]
+        end
 
-!includeurl GCPPuml/GCPCommon.puml
-!includeurl GCPPuml/Compute/all.puml
-!includeurl GCPPuml/Network/all.puml
-!includeurl GCPPuml/Database/all.puml
+        gke[GKE Cluster\nMicroservices Cluster]
+        subgraph gke
+            nodes[Node Pools\nManaged Instances]
+        end
 
-skinparam linetype polyline
-skinparam linetype ortho
+        database[Cloud SQL\nManaged Databases]
+        cache[Memorystore\nRedis Cache]
+        lb[Load Balancer\nTraffic Distribution]
 
-rectangle "GCP Project" {
-    GCPVirtualPrivateCloud(vpc, "VPC Network", "Multi-regional Network"){
-        GCPSubnet(subnet1, "Subnet 1", "us-central1")
-        GCPSubnet(subnet2, "Subnet 2", "us-west1")
-    }
-
-    GCPKubernetesCluster(gke, "GKE Cluster", "Microservices Cluster") {
-        GCPComputeEngine(nodes, "Node Pools", "Managed Instances")
-    }
-
-    GCPCloudSQL(database, "Cloud SQL", "Managed Databases") {
-        database -> subnet1
-    }
-
-    GCPMemorystore(cache, "Memorystore", "Redis Cache") {
-        cache -> subnet2
-    }
-
-    GCPLoadBalancing(lb, "Load Balancer", "Traffic Distribution")
-}
-@enduml
+        database --> subnet1
+        cache --> subnet2
+    end
 ```
 
 ### Detailed Component Diagram
+
+```mermaid
+flowchart TB
+    subgraph "Infrastructure as Code"
+        TFModules[Terraform Modules]
+        ModuleRegistry[Module Registry]
+        CICD[CI/CD Pipeline]
+    end
+
+    subgraph "GCP Infrastructure"
+        Network[Network Configuration]
+        GKE[Kubernetes Clusters]
+        Databases[Database Services]
+        Observability[Monitoring & Logging]
+    end
+
+    Developer --> TFModules
+    CloudAdmin --> CICD
+    TFModules --> ModuleRegistry
+    CICD --> Network
+    CICD --> GKE
+    CICD --> Databases
+    CICD --> Observability
+
+    classDef person fill:#f9f,stroke:#333,stroke-width:2px;
+    class Developer,CloudAdmin person;
+```
+
+### Infrasturcture Flow Diagram
+
+```mermaid
+stateDiagram-v2
+    state "Initialize Terraform" as Init
+    state "Load Environment Variables" as LoadEnv
+    state "Validate Infrastructure" as Validate
+    state "Plan Infrastructure" as Plan
+    state "Changes Detected?" as Changes
+    state "Apply Changes" as Apply
+    state "Update Module Registry" as UpdateRegistry
+    state "Trigger Notifications" as Notify
+    state "Skip Deployment" as Skip
+    state "Halt Deployment" as Halt
+    state "Generate Error Report" as ErrorReport
+
+    [*] --> Init
+    Init --> LoadEnv
+    LoadEnv --> Validate
+    Validate --> Changes : Environment Valid
+    Validate --> Halt : Environment Invalid
+    Halt --> ErrorReport
+    ErrorReport --> [*]
+
+    Changes --> Plan : Changes Detected
+    Changes --> Skip : No Changes
+    Plan --> Apply
+    Apply --> UpdateRegistry
+    UpdateRegistry --> Notify
+    Notify --> [*]
+
+    Skip --> [*]
+```
+
+### Architecture Context Diagram
+
+```mermaid
+flowchart TB
+    subgraph "External Systems"
+        Users[External Users]
+        ThirdParty[Third-Party Services]
+    end
+
+    subgraph "Infrastructure Layer"
+        LoadBalancer[Global Load Balancer]
+        CDN[Content Delivery Network]
+        
+        subgraph "Compute Layer"
+            GKE[Kubernetes Clusters]
+            Serverless[Serverless Functions]
+        end
+
+        subgraph "Data Layer"
+            PrimaryDB[Primary Databases]
+            CacheLayer[Distributed Cache]
+            DataWarehouse[Data Warehouse]
+        end
+
+        subgraph "Network Layer"
+            VPC[Virtual Private Cloud]
+            Subnets[Multiple Subnets]
+            Peering[VPC Peering]
+        end
+
+        subgraph "Security Layer"
+            IAM[Identity & Access Management]
+            SecretManager[Secret Management]
+            CloudArmor[Cloud Armor]
+        end
+    end
+
+    Users --> LoadBalancer
+    ThirdParty --> LoadBalancer
+    LoadBalancer --> GKE
+    LoadBalancer --> Serverless
+    GKE --> PrimaryDB
+    GKE --> CacheLayer
+    Serverless --> DataWarehouse
+    
+    VPC --> IAM
+    VPC --> CloudArmor
+```
+
+### Service Interaction Diagram
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant LoadBalancer
+    participant APIGateway
+    participant Microservice
+    participant Database
+    participant Cache
+
+    User->>LoadBalancer: HTTP Request
+    LoadBalancer->>APIGateway: Route Request
+    APIGateway->>Microservice: Process Request
+    
+    alt Cache Hit
+        Microservice->>Cache: Check Cached Data
+        Cache-->>Microservice: Return Cached Response
+    else Cache Miss
+        Microservice->>Database: Query Data
+        Database-->>Microservice: Return Data
+        Microservice->>Cache: Store in Cache
+    end
+
+    Microservice-->>APIGateway: Generate Response
+    APIGateway-->>LoadBalancer: Forward Response
+    LoadBalancer-->>User: Send Response
+```
 
 ## 📂 Repository Structure
 
