@@ -1,0 +1,36 @@
+name: Module README Generator
+
+on:
+  push:
+    paths:
+      - 'modules/**/*.tf'
+      - 'modules/**/metadata.json'
+      - 'modules/**/generate_readme.py'
+
+jobs:
+  generate-readme:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.9'
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install python-hcl2 markdown
+    
+    - name: Find and Generate READMEs
+      run: |
+        find modules -name "generate_readme.py" -exec python {} \;
+    
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add **/README.md
+        git commit -m "Auto-generate module READMEs" || exit 0
+        git push
