@@ -4,16 +4,16 @@ variable "name" {
 }
 
 variable "interconnect_id" {
-  description = "ID of the interconnect"
+  description = "ID of the interconnect to attach"
   type        = string
 }
 
 variable "region" {
-  description = "GCP region for the interconnect"
+  description = "Region where the interconnect attachment resides"
   type        = string
 }
 
 variable "cloud_router_id" {
-  description = "Cloud router ID"
+  description = "ID of the cloud router to associate with the interconnect attachment"
   type        = string
 }

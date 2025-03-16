@@ -1,30 +1,34 @@
 variable "instance_name" {
-  description = "Name of the Filestore instance"
+  description = "The name of the Filestore instance"
   type        = string
 }
 
-variable "zone" {
-  description = "Zone for the Filestore instance"
+variable "location" {
+  description = "The location where the Filestore instance will be created"
   type        = string
 }
 
 variable "tier" {
-  description = "Filestore tier"
+  description = "The tier of the Filestore instance (e.g., STANDARD, PREMIUM)"
   type        = string
-  default     = "STANDARD"
 }
 
 variable "file_share_name" {
-  description = "Name of the file share"
+  description = "The name of the file share"
   type        = string
 }
 
 variable "capacity_gb" {
-  description = "Capacity in GB of the file share"
+  description = "The capacity of the file share in GB"
   type        = number
 }
 
 variable "network" {
-  description = "Network for the Filestore instance"
+  description = "The network where the Filestore instance will be created"
   type        = string
+}
+
+variable "modes" {
+  description = "The modes of the network (e.g., SINGLE_IP_OR_SUBNET)"
+  type        = list(string)
 }

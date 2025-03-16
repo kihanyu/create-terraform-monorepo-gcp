@@ -1,6 +1,6 @@
 resource "google_filestore_instance" "filestore_instance" {
   name     = var.instance_name
-  zone     = var.zone
+  location = var.location
   tier     = var.tier
 
   file_shares {
@@ -10,5 +10,6 @@ resource "google_filestore_instance" "filestore_instance" {
 
   networks {
     network = var.network
+    modes   = var.modes
   }
 }

@@ -8,7 +8,7 @@ variable "project_id" {
   type        = string
 }
 
-variable "region" {
-  description = "Region for the Firestore database"
+variable "location_id" {
+  description = "The location ID for the Firestore database"
   type        = string
 }

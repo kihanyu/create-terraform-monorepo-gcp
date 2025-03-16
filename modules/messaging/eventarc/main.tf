@@ -9,12 +9,13 @@ resource "google_eventarc_trigger" "eventarc_trigger" {
     }
   }
 
-  filter {
-    event_type = "google.pubsub.topic.publish"
+  matching_criteria {
+    attribute = "type"
+    value     = "google.pubsub.topic.publish"
+  }
 
-    event_filters {
-      attribute = "pubsubtopic"
-      value     = var.pubsub_topic_id
-    }
+  matching_criteria {
+    attribute = "pubsubtopic"
+    value     = var.pubsub_topic_id
   }
 }

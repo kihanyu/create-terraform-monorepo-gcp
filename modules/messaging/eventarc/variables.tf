@@ -4,7 +4,7 @@ variable "trigger_name" {
 }
 
 variable "location" {
-  description = "Location for the Eventarc trigger"
+  description = "GCP location for the Eventarc trigger"
   type        = string
 }
 
@@ -19,6 +19,6 @@ variable "cloud_run_region" {
 }
 
 variable "pubsub_topic_id" {
-  description = "PubSub topic ID to filter on"
+  description = "ID of the Pub/Sub topic to filter on"
   type        = string
 }

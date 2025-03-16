@@ -4,11 +4,16 @@ variable "name" {
 }
 
 variable "region" {
-  description = "Region for the managed instance group"
+  description = "Region where the managed instance group will reside"
+  type        = string
+}
+
+variable "base_instance_name" {
+  description = "Base name for the instances in the group"
   type        = string
 }
 
 variable "target_size" {
-  description = "Number of instances to manage"
+  description = "Number of instances to manage in the group"
   type        = number
 }
