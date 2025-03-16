@@ -29,8 +29,8 @@ jobs:
     
     - name: Commit changes
       run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
+        git config --local user.email "kihan.yu@gmail.com"
+        git config --local user.name "유기한"
         git add **/README.md
         git commit -m "Auto-generate module READMEs" || exit 0
         git push
