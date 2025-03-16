@@ -1,7 +1,7 @@
 {
-    "module_name": "gcp-network",
+    "module_name": "vpc",
     "version": "2.0.0",
-    "category": "networking",
+    "category": "network",
     "provider": "google",
     "compatibility": {
       "terraform": ">=1.5.0",
@@ -14,9 +14,9 @@
     ],
     "maintainers": [
       {
-        "name": "Your Name",
-        "email": "your.email@example.com",
-        "github": "@yourusername"
+        "name": "유기한",
+        "email": "kihan.yu@gmail.com",
+        "github": "@kihanyu"
       }
     ],
     "license": "MIT"
