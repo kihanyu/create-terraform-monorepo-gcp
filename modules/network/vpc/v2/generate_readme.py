@@ -3,7 +3,7 @@ import sys
 import os
 
 # Append the project root to Python path
-project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../..'))
+project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 sys.path.append(project_root)
 
 # Import the base README generator
