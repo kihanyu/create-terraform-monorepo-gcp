@@ -4,6 +4,20 @@
 
 This monorepo provides a comprehensive, scalable, and modular Terraform infrastructure setup for Google Cloud Platform (GCP) microservices architectures.
 
+## Project Badges
+
+### Status Badges
+
+![Build Status](https://img.shields.io/github/workflow/status/kihanyu/create-terraform-monorepo-gcp/CI)
+![Version](https://img.shields.io/github/v/release/kihanyu/create-terraform-monorepo-gcp)
+![Terraform Version](https://img.shields.io/badge/terraform-1.5+-blueviolet)
+
+### Community Badges
+
+![Contributors](https://img.shields.io/github/contributors/kihanyu/create-terraform-monorepo-gcp)
+![Last Commit](https://img.shields.io/github/last-commit/kihanyu/create-terraform-monorepo-gcp)
+![Open Issues](https://img.shields.io/github/issues/kihanyu/create-terraform-monorepo-gcp)
+
 ### Key Features
 
 - 🌐 Multi-environment support (dev, staging, production)
@@ -231,13 +245,11 @@ This project is licensed under the MIT License.
 - [Google Cloud Documentation](https://cloud.google.com/docs)
 - [Terraform GCP Provider](https://registry.terraform.io/providers/hashicorp/google/latest/docs)
 
-Maintained by Your Organization
+## Maintained by My Organization
 
 Terraform GCP
 
- copy
-
-Key Sections Included:
+### Key Sections Included:
 1. Project Overview
 2. Repository Structure
 3. Prerequisites
@@ -251,11 +263,9 @@ Key Sections Included:
 11. Changelog Management
 12. Support and Resources
 
-Recommended Enhancements:
+### Recommended Enhancements:
 - Add badges
 - Include architecture diagrams
 - Create separate documentation site
 - Add more detailed examples
 - Include troubleshooting section
-
-Would you like me to elaborate on any specific section of the README?
