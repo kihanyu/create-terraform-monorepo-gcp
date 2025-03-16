@@ -25,6 +25,47 @@ This monorepo provides a comprehensive, scalable, and modular Terraform infrastr
 - 📦 Modular infrastructure design
 - 🤖 Automated documentation and versioning
 - 🔄 Continuous integration and deployment
+ 
+## 🏗 Architecture Overview
+
+### High-Level Infrastructure Architecture
+
+```plantuml
+@startuml
+!define GCPPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-GCP-Iconz/master/dist
+
+!includeurl GCPPuml/GCPCommon.puml
+!includeurl GCPPuml/Compute/all.puml
+!includeurl GCPPuml/Network/all.puml
+!includeurl GCPPuml/Database/all.puml
+
+skinparam linetype polyline
+skinparam linetype ortho
+
+rectangle "GCP Project" {
+    GCPVirtualPrivateCloud(vpc, "VPC Network", "Multi-regional Network"){
+        GCPSubnet(subnet1, "Subnet 1", "us-central1")
+        GCPSubnet(subnet2, "Subnet 2", "us-west1")
+    }
+
+    GCPKubernetesCluster(gke, "GKE Cluster", "Microservices Cluster") {
+        GCPComputeEngine(nodes, "Node Pools", "Managed Instances")
+    }
+
+    GCPCloudSQL(database, "Cloud SQL", "Managed Databases") {
+        database -> subnet1
+    }
+
+    GCPMemorystore(cache, "Memorystore", "Redis Cache") {
+        cache -> subnet2
+    }
+
+    GCPLoadBalancing(lb, "Load Balancer", "Traffic Distribution")
+}
+@enduml
+```
+
+### Detailed Component Diagram
 
 ## 📂 Repository Structure
 
